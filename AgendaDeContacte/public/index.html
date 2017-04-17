@@ -1,0 +1,183 @@
+<!DOCTYPE>
+
+<html ng-app='myApp'>
+<head>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+
+ 
+ <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootswatch/3.2.0/sandstone/bootstrap.min.css">
+ <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+   
+
+    
+    <style>
+        body { padding-top:50px; }
+    </style>
+
+
+
+    <title  >CONTACTELE MELE</title>
+   
+     <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css"> 
+    <style >.w3-btn</style>
+
+    <style type="text/css" >
+      body{
+
+        /*background-image: url(img.jpg);
+        background-repeat: repeat;
+        background-position: top center;  
+        background-attachment: fixed;
+        background-color: rgba(0,0,4,0);*/
+        background: url(img.jpg) no-repeat center center fixed; 
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+         background-size: cover;
+      }
+    </style>
+
+</head>
+<body >
+   
+   
+   <div class ="container" ng-controller="AppCtrl" >
+       <div class = "w3-container ">
+       
+    <h1 style=" color:blue ">CONTACTELE MELE </h1>  
+
+    <form>
+    <div class="form-group">
+      <div class="input-group">
+        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+        <input type="text" class="form-control" placeholder="Search contact" ng-model="searchFilter" style="width: 300px; ">
+      </div>      
+    </div>
+  </form>
+      
+
+       <table class ="table">
+          <thead>
+            
+            <tr>
+              
+                <th>NAME</th>
+                <th>EMAIL</th>
+                <th>PHONE NUMB</th>
+               
+                <th>&nbsp;</th>
+
+            </tr>
+
+          </thead>
+          <tbody>
+            
+            <tr>
+              
+             <td><input class="form-control" ng-model="contact.name"></td>
+             <td><input class="form-control" ng-model="contact.email"></td>
+             <td><input class="form-control" ng-model="contact.number"></td>
+
+             <td><button class="w3-btn w3-red" ng-click="addContact()">ADD CONTACT</button></td>
+             
+             <td><button class="btn btn-info" ng-click="update()">Update</button>&nbsp;&nbsp;
+             <button class ="btn btn-info" ng-click="deselect()">CLEAR</button></td>
+             
+
+            </tr>
+           
+          </tbody>
+
+        </table>
+       
+      
+      <!--  <tr> <input class="form-control" ng-model="contact.name"></tr>
+        <input class="form-control" ng-model="contact.email">
+        <input class="form-control" ng-model="contact.number">
+
+        <button class="w3-btn w3-red" ng-click="addContact()">ADD CONTACT</button>
+             
+         <button class="btn btn-info" ng-click="update()">Update</button>&nbsp;&nbsp;
+         <button class ="btn btn-info" ng-click="deselect()">CLEAR</button>
+        <br /><br /> -->
+   
+
+        <table class="table table-hover " style="color: black" >
+    
+      <thead >
+            <tr >
+              <td >
+                <a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">
+                  Name 
+                  <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
+                  <span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
+                </a>
+              </td>
+              <td>
+                <a href="#" ng-click="sortType = 'email'; sortReverse = !sortReverse">
+                Email
+                  <span ng-show="sortType == 'email' && !sortReverse" class="fa fa-caret-down"></span>
+                  <span ng-show="sortType == 'email' && sortReverse" class="fa fa-caret-up"></span>
+                </a>
+              </td>
+              <td>
+                <a href="#" ng-click="sortType = 'number'; sortReverse = !sortReverse">
+                Phone Number
+                  <span ng-show="sortType == 'number' && !sortReverse" class="fa fa-caret-down"></span>
+                  <span ng-show="sortType == 'number' && sortReverse" class="fa fa-caret-up"></span>
+                </a>
+              </td>
+              <td>
+                <a href="#" ng-click="sortType = 'number'; sortReverse = !sortReverse">
+                
+                  
+                </a>
+              </td><td>
+                <a href="#" ng-click="sortType = 'number'; sortReverse = !sortReverse">
+                
+                </a>
+              </td>
+            </tr>
+    </thead>
+    
+    <tbody>
+      <tr  ng-repeat="contact in contactlist | orderBy:sortType:sortReverse | filter:searchFilter">
+        <td>{{ contact.name }} </td>
+       <td>{{ contact.email }}</td>
+       <td>{{ contact.number }}</td>
+
+        <td>
+                <button  class ="btn btn-danger" ng-click="remove(contact._id)">Remove</button>
+              </td>
+              <td> 
+                <button class ="btn btn-warning" ng-click="edit(contact._id)">Edit</button>
+              </td>
+
+      </tr>
+     
+    </tbody>
+    
+  </table>
+
+   
+   </div>
+   </div>
+
+
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
+<script src="controllers/controller.js"></script>
+<script src="/js/libs/jquery.validate.js" type="text/javascript"></script>
+</body>
+
+
+
+
+</html>
